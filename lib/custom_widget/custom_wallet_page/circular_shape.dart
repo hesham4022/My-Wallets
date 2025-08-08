@@ -16,7 +16,7 @@ class CircularShape extends StatelessWidget {
     return CircularPercentIndicator(
       radius: radius,
       lineWidth: 5,
-      percent: current / Total2,
+      percent: (current / Total2).clamp(0.0, 1.0),
       animation: true,
       circularStrokeCap: CircularStrokeCap.round,
       progressColor: Colors.lightBlueAccent,

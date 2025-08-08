@@ -66,13 +66,7 @@ class _WalletFormBottomSheetState extends State<WalletFormBottomSheet> {
                   label: 'Amount',
                   keyboardType: TextInputType.number),
               _buildTextField(
-                  controller: createdAtController, label: 'Created At'),
-              _buildTextField(
                   controller: walletTypeController, label: 'Wallet Type'),
-              _buildTextField(
-                  controller: progressController,
-                  label: 'Progress (%)',
-                  keyboardType: TextInputType.number),
               SizedBox(height: 20),
               BlocBuilder<AddwalletCubit, AddwalletState>(
                 builder: (context, state) {
@@ -87,9 +81,7 @@ class _WalletFormBottomSheetState extends State<WalletFormBottomSheet> {
                               ? 'بدون اسم'
                               : nameController.text.trim(),
                           amount: double.tryParse(amountController.text) ?? 0.0,
-                          createdAt: createdAtController.text.trim().isEmpty
-                              ? 'غير محدد'
-                              : createdAtController.text.trim(),
+                          createdAt: DateTime.now().toIso8601String(),
                           walletType: walletTypeController.text.trim().isEmpty
                               ? 'غير محدد'
                               : walletTypeController.text.trim(),

@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  int _currentIndex = 3;
   late TabController _tabController;
 
   @override
@@ -29,91 +28,67 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(
-      selectedIndex: _currentIndex,
-      onItemTap: (index) {
-        if (index == 3) {
-          _tabController.animateTo(0);
-          setState(() {
-            _currentIndex = 3;
-          });
-        } else {
-          // باقي الصفحات
-          Navigator.pushNamed(
-            context,
-            index == 0
-                ? '/details'
-                : index == 1
-                    ? '/calendar'
-                    : '/wallet',
-          );
-        }
-      },
-      body: Column(
-        children: [
-          MainAppBar(
-            icon: Icons.person,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              height: 70,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                color: const Color(0xff292a3f),
-              ),
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: TabBar(
-                  controller: _tabController,
-                  indicator: BoxDecoration(
-                    color: const Color(0xff2d2d49),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  dividerColor: Colors.transparent,
-                  tabs: const [
-                    Tab(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: Text(
-                          "محافظي",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: Text(
-                          "بطاقاتي",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            height: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: const Color(0xff292a3f),
+            ),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: TabBar(
+                controller: _tabController,
+                indicator: BoxDecoration(
+                  color: const Color(0xff2d2d49),
+                  borderRadius: BorderRadius.circular(40),
                 ),
+                dividerColor: Colors.transparent,
+                tabs: const [
+                  Tab(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: Text(
+                        "محافظي",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: Text(
+                        "بطاقاتي",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                MyWalletsInhomepage(),
-                Mycards(),
-              ],
-            ),
+        ),
+        const SizedBox(height: 10),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              MyWalletsInhomepage(),
+              Mycards(),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
